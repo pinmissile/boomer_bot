@@ -33,9 +33,10 @@ function sendMessage(message, channel, uwuride=false){
     if (owo && !uwuride){message = owofy(message)};
     if (Math.random() >= 0.7){
         // Sends an evil message and then edits the message back to the intended one.
-        evilMessage(message, channel)
+        evilMessage(message, channel);
     }  
-    else{
+    else{  
+        if (owo && !uwuride){message = owofy(message)};
         bot.sendMessage({
             to: channel,
             message: message
@@ -48,17 +49,10 @@ function evilMessage(message, channel){
     bot.sendMessage({
         to: channel,
         message: evil_msg[Math.floor(Math.random() * evil_msg.length)]
-    });
-    setTimeout(function(){
+    }, function (err, res){
         // Picks up the ID of the recently sent message.
-        bot.getMessages({
-            channelID: channel,
-            limit: 1
-        }, function(error, response){
-            theID = response[0]['id']
-            logger.info(response[0]['content'])
-        });
-    },350)
+        theID = res.id
+    });
     setTimeout(function(){
         // Edits that message back to the original one.
         bot.editMessage({
@@ -66,7 +60,7 @@ function evilMessage(message, channel){
             messageID: theID,
             message: message
         });
-    },500)
+    },1000)
 }
 
 bot.on('ready', function (evt) {
