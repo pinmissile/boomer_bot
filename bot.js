@@ -7,14 +7,14 @@ const randomPuppy = require('random-puppy');
 const auth = require('./auth.json');
 // Global variables
 var patience = 20
-var owo = false
+var uwu_channel = new Set()
 const bot_id = "745342491678736425"
 // Messages
 var messages = require('./tell_something.json'); 
 var rants = require('./rants.json'); 
-var christmas_messages = require('./christmas.json'); 
-var uwu_msg = require('./uwu_toggle.json'); 
-var evil_msg = require('./evil_messages.json');
+var christmasMsg = require('./christmas.json'); 
+var uwuMsg = require('./uwu_toggle.json'); 
+var evilMsg = require('./evil_messages.json');
 
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console, {
@@ -30,13 +30,12 @@ var bot = new Discord.Client({
 
 function sendMessage(message, channel, uwuride=false){
     // if uwuride is true, it will ignore the uwu mode.
-    if (owo && !uwuride){message = owofy(message)};
     if (Math.random() >= 0.7){
         // Sends an evil message and then edits the message back to the intended one.
         evilMessage(message, channel);
     }  
-    else{  
-        if (owo && !uwuride){message = owofy(message)};
+    else{
+        if (uwu_channel.has(channel) && !uwuride){message = owofy(message)};
         bot.sendMessage({
             to: channel,
             message: message
@@ -48,7 +47,7 @@ function evilMessage(message, channel){
     let theID = ''
     bot.sendMessage({
         to: channel,
-        message: evil_msg[Math.floor(Math.random() * evil_msg.length)]
+        message: randomMessage(evilMsg)
     }, function (err, res){
         // Picks up the ID of the recently sent message.
         theID = res.id
@@ -61,6 +60,10 @@ function evilMessage(message, channel){
             message: message
         });
     },1000)
+}
+
+function randomMessage(message_array){
+    return message_array[Math.floor(Math.random() * message_array.length)]
 }
 
 bot.on('ready', function (evt) {
@@ -88,12 +91,11 @@ bot.on('message', function (user, userID, channelID, message, evt) {
     else if (message.includes("boomer")){
         if (message.includes("tell")){
             if (message.includes("something")){
-                msg = messages[Math.floor(Math.random() * messages.length)]
-                sendMessage(msg, channelID);
+                sendMessage(randomMessage(messages), channelID);
             }
             if (message.includes("rant")){
                 msg = rants[Math.floor(Math.random() * rants.length)]
-                sendMessage(msg,channelID)
+                sendMessage(randomMessage(rants),channelID)
             }
             if (message.includes("meme")){
                 // Sends a random meme from /r/boomershumor
@@ -108,8 +110,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             }
         }
         else if (message.includes("merry christmas")){
-            msg = christmas_messages[Math.floor(Math.random() * christmas_messages.length)]
-            sendMessage(msg, channelID);
+            sendMessage(randomMessage(christmasMsg), channelID);
         }
         else if (message.includes("opinion on pinmissile")){
             sendMessage("i have nightmares about him every night.",channelID);
@@ -155,12 +156,12 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             sendMessage(msg, channelID);
         }
         else if(message.includes('uwu') || message.includes('owo')){
-            owo = !owo;
-            if (owo){
-                msg = uwu_msg[Math.floor(Math.random() * uwu_msg.length)]
-                sendMessage(msg, channelID);
+            if (!uwu_channel.has(channelID)){
+                uwu_channel.add(channelID)
+                msg = randomMessage(uwuMsg)
             }
-            else{
+            else {
+                uwu_channel.delete(channelID)
                 msg = 'you might have ended the horror, but you can never erase what you have done.'
             }
             sendMessage(msg, channelID);
