@@ -13,7 +13,7 @@ const bot_id = "745342491678736425"
 var messages = require('./tell_something.json'); 
 var rants = require('./rants.json'); 
 var christmas_messages = require('./christmas.json'); 
-var uwu_msg = require('./christmas.json'); 
+var uwu_msg = require('./uwu_toggle.json'); 
 
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console, {
