@@ -54,6 +54,7 @@ function evilMessage(message, channel){
     });
     setTimeout(function(){
         // Edits that message back to the original one.
+        if (uwu_channel.has(channel) && !uwuride){message = owofy(message)};
         bot.editMessage({
             channelID: channel,
             messageID: theID,
