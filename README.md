@@ -27,18 +27,24 @@ node bot.js
 ```
 
 ## How to contribute to this awful project
-You, too, can contribute to this act of human indecency! 
-Fork the project, clone the repo to your computer, make a branch, and do a pull request. 
-If I don't respond in a reasonable time, feel free to ping me directly.
+You, too, can contribute to this act of human indecency! Fork the project, clone the repo to your computer, make a branch, and do a pull request. If I don't respond in a reasonable time, feel free to ping me directly.
 
-_I want to add more responses!_
+*I want to add more responses!*
+
 Check out one of the .jsons in the main directory: `christmas.json`, `evil_messages.json`, `rants.json`, `tell_something.json`, `uwu_toggle.json`. 
+
 Add another response in the array, and make sure you [validate your json](https://jsonlint.com/) before you push your improvements. Invalid jsons are almost as bad as Boomer Bot.
-_I want to add more functions!_
+
+*I want to add more functions!*
+
 Cool, just make a branch, do your magic and submit a pull request.
-_I don't know how to code, though._
-There's a lot of neat guides out there, if you found your way here, you know how to google. Boomer bot isn't rocket science. You'll figure it out, skipper.
-_Yeah, but I want you to do it for me._
+
+*I don't know how to code, though.*
+
+There's a lot of neat guides out there, if you found your way here, you know how to google. Boomer bot isn't rocket surgery. You'll figure it out, skipper.
+
+*Yeah, but I want you to do it for me.*
+
 Submit your requests to bill.gates@microsoft.com.
 
 ## How to debug
