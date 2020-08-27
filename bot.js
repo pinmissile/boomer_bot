@@ -32,7 +32,7 @@ function sendMessage(message, channel, uwuride=false){
     // if uwuride is true, it will ignore the uwu mode.
     if (Math.random() >= 0.7){
         // Sends an evil message and then edits the message back to the intended one.
-        evilMessage(message, channel);
+        evilMessage(message, channel, uwuride);
     }  
     else{
         if (uwu_channel.has(channel) && !uwuride){message = owofy(message)};
@@ -43,7 +43,7 @@ function sendMessage(message, channel, uwuride=false){
     }
 }
 
-function evilMessage(message, channel){
+function evilMessage(message, channel, uwuride){
     let theID = ''
     bot.sendMessage({
         to: channel,
