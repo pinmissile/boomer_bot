@@ -1,0 +1,17 @@
+{
+	"name": "boomer-bot",
+	"version": "1.0.0",
+	"description": "A bot of a disgusting boomer",
+	"main": "bot.js",
+	"author": "Pinmissile",
+	"bin": "bin.js",
+	"dependencies": {
+		"discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+		"node-fetch": "^2.6.0",
+		"owofy": "^0.3.2",
+		"pkg": "^4.4.8",
+		"random-puppy": "^1.1.0",
+		"snekfetch": "^4.0.4",
+		"winston": "^3.2.1"
+	}
+}
