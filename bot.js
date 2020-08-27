@@ -14,6 +14,7 @@ var messages = require('./tell_something.json');
 var rants = require('./rants.json'); 
 var christmas_messages = require('./christmas.json'); 
 var uwu_msg = require('./uwu_toggle.json'); 
+var evil_msg = require('./evil_messages.json');
 
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console, {
@@ -30,10 +31,42 @@ var bot = new Discord.Client({
 function sendMessage(message, channel, uwuride=false){
     // if uwuride is true, it will ignore the uwu mode.
     if (owo && !uwuride){message = owofy(message)};
+    if (Math.random() >= 0.7){
+        // Sends an evil message and then edits the message back to the intended one.
+        evilMessage(message, channel)
+    }  
+    else{
+        bot.sendMessage({
+            to: channel,
+            message: message
+        });
+    }
+}
+
+function evilMessage(message, channel){
+    let theID = ''
     bot.sendMessage({
         to: channel,
-        message: message
+        message: evil_msg[Math.floor(Math.random() * evil_msg.length)]
     });
+    setTimeout(function(){
+        // Picks up the ID of the recently sent message.
+        bot.getMessages({
+            channelID: channel,
+            limit: 1
+        }, function(error, response){
+            theID = response[0]['id']
+            logger.info(response[0]['content'])
+        });
+    },350)
+    setTimeout(function(){
+        // Edits that message back to the original one.
+        bot.editMessage({
+            channelID: channel,
+            messageID: theID,
+            message: message
+        });
+    },500)
 }
 
 bot.on('ready', function (evt) {
