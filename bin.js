@@ -1,1 +1,0 @@
-const boomerbot = require('.') 
