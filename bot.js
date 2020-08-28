@@ -95,7 +95,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 sendMessage(randomMessage(messages), channelID);
             }
             if (message.includes("rant")){
-                msg = rants[Math.floor(Math.random() * rants.length)]
                 sendMessage(randomMessage(rants),channelID)
             }
             if (message.includes("meme")){
