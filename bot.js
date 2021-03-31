@@ -115,6 +115,9 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         else if (message.includes("opinion on pinmissile")){
             sendMessage("i have nightmares about him every night.",channelID);
         }
+        else if (message.includes("opinion on razmus")){
+            sendMessage("FILTHY BADGER BURNER!!!!!!!!!",channelID);
+        }
         else if (message.includes("opinion on ")){
             // this shit is awful and i hate it
             str_back = message.split("opinion on")[1].toUpperCase()
